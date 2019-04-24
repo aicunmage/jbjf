@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jfhealthcare.modules.system.mapper.SysOperOrgRelMapper">
+  <resultMap id="BaseResultMap" type="com.jfhealthcare.modules.system.entity.SysOperOrgRel">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="relation_id" jdbcType="INTEGER" property="relationId" />
+    <result column="oper_group_id" jdbcType="VARCHAR" property="operGroupId" />
+    <result column="org_group_id" jdbcType="INTEGER" property="orgGroupId" />
+    <result column="is_valid" jdbcType="INTEGER" property="isValid" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="expire_date" jdbcType="TIMESTAMP" property="expireDate" />
+    <result column="extend1" jdbcType="VARCHAR" property="extend1" />
+    <result column="extend2" jdbcType="VARCHAR" property="extend2" />
+    <result column="extend3" jdbcType="VARCHAR" property="extend3" />
+  </resultMap>
+  
+  	<select id="queryOrgGroupInfo"  parameterType="String" resultType="java.util.Map">
+		select group_id, group_name from sys_org_group_def where group_id in(
+		select org_group_id from sys_oper_org_rel a
+     <where>
+     	a.is_valid = 1 and
+	    a.oper_group_id=#{operGroupId,jdbcType=VARCHAR}
+	 </where>
+	 	);
+	</select>
+	
+</mapper>

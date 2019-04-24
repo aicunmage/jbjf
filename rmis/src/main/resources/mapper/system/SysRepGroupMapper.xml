@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfhealthcare.modules.system.mapper.SysRepGroupMapper" >
+  <resultMap id="BaseResultMap" type="com.jfhealthcare.modules.system.entity.SysRepGroup" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="GROUP_ID" property="groupId" jdbcType="VARCHAR" />
+    <result column="SOD_ID" property="sodId" jdbcType="VARCHAR" />
+    <result column="IMAGE_CENTER_ID" property="imageCenterId" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectByGroupId" parameterType="com.jfhealthcare.modules.system.entity.SysRepGroup" resultType="com.jfhealthcare.modules.system.response.SysRepGroupResponse">
+    select a.id id, a.group_id groupId, a.logincode logincode, b.name userName from sys_rep_group a,sys_operator b 
+	<where> 
+		 a.logincode=b.logincode 
+		 and a.group_id=#{groupId,jdbcType=VARCHAR};
+	</where>
+  </select>
+  <select id="querySysRepGroupByOperId" parameterType="com.jfhealthcare.modules.system.entity.SysRepGroup" resultType="java.util.Map">
+    select a.group_id id, a.logincode logincode, b.name name from sys_rep_group a,rep_group b 
+	<where> 
+		 a.group_id=b.id 
+		 and a.logincode=#{operId,jdbcType=VARCHAR};
+	</where>
+  </select>
+</mapper>

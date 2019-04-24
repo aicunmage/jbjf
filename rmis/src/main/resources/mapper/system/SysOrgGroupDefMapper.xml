@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jfhealthcare.modules.system.mapper.SysOrgGroupDefMapper">
+  <resultMap id="BaseResultMap" type="com.jfhealthcare.modules.system.entity.SysOrgGroupDef">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="group_id" jdbcType="INTEGER" property="groupId" />
+    <result column="group_name" jdbcType="VARCHAR" property="groupName" />
+    <result column="group_pro" jdbcType="VARCHAR" property="groupPro" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="extend1" jdbcType="VARCHAR" property="extend1" />
+    <result column="extend2" jdbcType="VARCHAR" property="extend2" />
+    <result column="extend3" jdbcType="VARCHAR" property="extend3" />
+  </resultMap>
+</mapper>

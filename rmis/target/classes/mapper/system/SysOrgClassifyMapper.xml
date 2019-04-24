@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfhealthcare.modules.system.mapper.SysOrgClassifyMapper" >
+  <resultMap id="BaseResultMap" type="com.jfhealthcare.modules.system.entity.SysOrgClassify" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="attribute" property="attribute" jdbcType="VARCHAR" />
+    <result column="weight" property="weight" jdbcType="INTEGER" />
+    <result column="colour" property="colour" jdbcType="VARCHAR" />
+    <result column="nindex" property="nindex" jdbcType="VARCHAR" />
+    <result column="org_code" property="orgCode" jdbcType="VARCHAR" />
+    <result column="IMAGE_CENTER_NAME" property="orgName" jdbcType="VARCHAR" />
+    <result column="namepy" property="namepy" jdbcType="VARCHAR" />
+    <result column="namewb" property="namewb" jdbcType="VARCHAR" />
+    <result column="upd_user" property="updUser" jdbcType="VARCHAR" />
+    <result column="upd_time" property="updTime" jdbcType="TIMESTAMP" />
+    <result column="crt_user" property="crtUser" jdbcType="VARCHAR" />
+    <result column="crt_time" property="crtTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="extend1" property="extend1" jdbcType="VARCHAR" />
+    <result column="extend2" property="extend2" jdbcType="VARCHAR" />
+    <result column="extend3" property="extend3" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="queryClassifyByCond" parameterType="map" resultMap="BaseResultMap" >
+    SELECT soc.*,so.`NAME` IMAGE_CENTER_NAME FROM sys_org_classify soc LEFT JOIN sys_organization so ON (soc.`org_code` = so.`CODE`)
+    <where>
+      so.ISDELETE = 0
+      <if test="namepy != null and namepy != ''">
+        and (soc.namepy like concat(concat('%',#{namepy,jdbcType=VARCHAR}),'%')
+              or soc.namewb like concat(concat('%',#{namepy,jdbcType=VARCHAR}),'%'))
+      </if>
+      <if test="orgCode != null and orgCode != ''">
+         and soc.org_code like concat(concat('%',#{orgCode,jdbcType=VARCHAR}),'%')
+      </if>
+    </where>
+    order by soc.crt_time desc
+  </select>
+</mapper>
